@@ -106,6 +106,27 @@ Selected training-region example patches include:
 
 > These are selected patch-level examples intended to visualize model behaviour, not full-region benchmark results.
 
+## Interactive Demo
+
+The repository includes an interactive Gradio app for exploring the final Siamese U-Net.
+
+Users can select a geographic region and satellite patch to compare:
+
+- 2018 Sentinel-2 imagery
+- 2025 Sentinel-2 imagery
+- Hansen ground truth
+- model prediction
+- diagnostic overlay
+- precision, recall, F1 and IoU
+
+![Interactive Gradio demo](results/gradio_demo.png)
+
+Run locally with:
+
+```bash
+python app.py
+```
+
 ## Limitations
 
 The final model is substantially more robust than the first version, but a single global threshold still does not perform equally well across all landscapes.
