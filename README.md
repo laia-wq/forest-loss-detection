@@ -121,9 +121,7 @@ Users can select a geographic region and satellite patch to compare:
 
 ![Interactive Gradio demo](results/gradio_demo.png)
 
-```markdown
 Run locally after installing dependencies and providing the trained model checkpoint and prepared dataset files:
-```
 
 ```bash
 pip install -r requirements.txt
