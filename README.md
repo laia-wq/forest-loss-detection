@@ -193,23 +193,27 @@ Each example contains:
 
 **2018 Sentinel-2 | 2025 Sentinel-2 | Hansen Ground Truth | Model Prediction | Diagnostic Overlay**
 
-The diagnostic overlay distinguishes true positives, false positives, false negatives, and true negatives.
+The colours distinguish true positives, false positives, false negatives, and true negatives.
 
-### Greece — Held-Out Test
+### Sweden — Central — Validation
 
-![Greece example](results/examples/example_01_greece.png)
+![Sweden Central example](results/examples/example_05_sweden_central.png)
 
-### Chile — Biobio — Held-Out Test
+### Finland — Central — Training
 
-![Chile example](results/examples/example_02_chile_biobio.png)
+![Finland Central example](results/examples/example_07_finland_central.png)
 
-### Australia — New South Wales — Held-Out Test
+### Germany — Black Forest — Training
 
-![Australia example](results/examples/example_03_australia_nsw.png)
+![Germany Black Forest example](results/examples/example_08_germany_blackforest.png)
 
-### Spain — Galicia — Validation
+### Brazil — Rondonia — Training
 
-![Spain Galicia example](results/examples/example_04_spain_galicia.png)
+![Brazil Rondonia example](results/examples/example_11_brazil_rondonia.png)
+
+### Canada — Alberta — Training
+
+![Canada Alberta example](results/examples/example_16_canada_alberta.png)
 
 The remaining examples are available in:
 
