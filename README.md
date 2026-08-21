@@ -4,7 +4,7 @@ A machine learning project for detecting forest loss from satellite imagery. Pro
 
 The final model performs pixel-level forest-loss segmentation, using six Sentinel-2 spectral bands and Hansen Global Forest Change labels across geographically diverse regions.
 
----
+
 
 ## Project Overview
 
