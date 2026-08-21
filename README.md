@@ -3,9 +3,9 @@ A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery 
 
 from satellite imagery. Progressing from a simpler EuroSAT land-use classification, to a multispectral Siamese U-Net trained on paired Sentinel-2 imagery from 2018 and 2025.
 
-#hello
-##hello
-###hello
+#hello#
+##hello##
+###hello###
 
 
 ## Project Overview (intro)
