@@ -1,12 +1,14 @@
-# Forest Loss Detection from Satellite Imagery
+# Forest Loss Detection from Satellite Imagery (shorter)
+A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery from 2018 and 2025
 
-A machine learning project for detecting forest loss from satellite imagery. Progressing from a simpler EuroSAT land-use classification, to a multispectral Siamese U-Net trained on paired Sentinel-2 imagery from 2018 and 2025.
+from satellite imagery. Progressing from a simpler EuroSAT land-use classification, to a multispectral Siamese U-Net trained on paired Sentinel-2 imagery from 2018 and 2025.
 
-The final model performs pixel-level forest-loss segmentation, using six Sentinel-2 spectral bands and Hansen Global Forest Change labels across geographically diverse regions.
+#hello
+##hello
+###hello
 
 
-
-## Project Overview
+## Project Overview (intro)
 
 This project began with a ResNet18 model, but the last layer was forgoten to train it on EuroSAT for land-use classification.
 
@@ -14,7 +16,7 @@ That first model achieved strong classification accuracy, but using land-cover c
 
 The project was then redesigned as a dedicated change-detection problem using a Siamese U-Net.
 
-### Final system
+### Final system (do i need)
 
 - **Input:** paired Sentinel-2 imagery from 2018 and 2025
 - **Bands:** B2, B3, B4, B8, B11, B12
@@ -27,7 +29,7 @@ The project was then redesigned as a dedicated change-detection problem using a 
 - **Held-out test regions:** 3
 - **Patch size:** 128 × 128 pixels
 
----
+
 
 ## Project Evolution
 
