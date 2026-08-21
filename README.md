@@ -147,6 +147,7 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 **Training:** multispectral normalization, synchronized augmentation, region/change-balanced sampling, BCE + Tversky loss, early stopping, learning-rate scheduling, threshold calibration
 
 **Compute:** NVIDIA DGX Spark, NVIDIA GB10 GPU
+
 ## Notebooks
 
 ### [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
