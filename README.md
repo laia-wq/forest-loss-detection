@@ -15,7 +15,7 @@ A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery 
 
 ## Background
 
-I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high classification accuracy during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection model, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
+I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high classification accuracy during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change, with a mean F1 of 0.42 mostly due to low recall. So I decided to use a dedicated change-detection model, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
 
 Key improvements included:
 
