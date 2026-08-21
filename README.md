@@ -15,7 +15,7 @@ A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery 
 
 ## Background
 
-I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high precision during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection tool, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
+I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high classification accuracy during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection model, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
 
 Key improvements included:
 
@@ -25,8 +25,8 @@ Key improvements included:
 - U-Net decoder
 - synchronized data augmentation
 - training-only per-band normalization
-- region-balanced sampling (between low, medium, high-loss patches)
-- change-balanced sampling
+- region-balanced sampling
+- change-balanced sampling (between low, medium, high-loss patches)
 - BCE + Tversky loss (α = 0.4, β = 0.6)
 - learning-rate scheduling
 - early stopping
@@ -46,14 +46,14 @@ The dataset was therefore expanded substantially:
 
 This added **8,569 training patches**, increasing the training dataset by approximately **5.9×** and the number of geographic training regions by **5×**.
 
-These feaures led to improvements such as the following data on Greece:
+These features led to improvements such as the following data on Greece:
 
-| Metric    | Initial Siamese | Final V2.2 |
-| --------- | --------------: | ---------: |
-| Precision |           0.914 |  **0.919** |
-| Recall    |           0.012 |  **0.254** |
-| F1        |           0.025 |  **0.399** |
-| IoU       |           0.012 |  **0.249** |
+| Metric    | Initial Siamese | Final Siamese |
+| --------- | --------------: | ------------: |
+| Precision |           0.914 |     **0.919** |
+| Recall    |           0.012 |     **0.254** |
+| F1        |           0.025 |     **0.399** |
+| IoU       |           0.012 |     **0.249** |
 
 This represents approximately a 16× improvement in F1  and a 20× improvement in recall on the same geographically unseen region.
 
@@ -140,42 +140,13 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 
 ## Technologies
 
-**Machine Learning**
+**Core ML:** Python, PyTorch, Torchvision, ResNet18, Siamese U-Net
 
-* Python
-* PyTorch
-* Torchvision
-* ResNet18
-* Siamese neural networks
-* U-Net
-* Transfer learning
+**Remote Sensing:** Sentinel-2, EuroSAT, Hansen Global Forest Change, Google Earth Engine, Rasterio
 
-**Remote Sensing**
+**Training:** multispectral normalization, synchronized augmentation, region/change-balanced sampling, BCE + Tversky loss, early stopping, learning-rate scheduling, threshold calibration
 
-* Sentinel-2
-* EuroSAT
-* Hansen Global Forest Change
-* Google Earth Engine
-* Rasterio
-
-**Training and Evaluation**
-
-* multispectral normalization
-* synchronized augmentation
-* region-balanced sampling
-* change-balanced sampling
-* BCE loss
-* Tversky loss
-* early stopping
-* learning-rate scheduling
-* threshold calibration
-* geographic holdout evaluation
-
-**Compute**
-
-* NVIDIA DGX Spark
-* NVIDIA GB10 GPU
-
+**Compute:** NVIDIA DGX Spark, NVIDIA GB10 GPU
 ## Notebooks
 
 ### [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
