@@ -1,11 +1,7 @@
 # Forest Loss Detection from Satellite Imagery
 A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery from 2018 and 2025
 
-## Overview
-
-Deforestation is becoming an increasingly dire problem, but oftentimes it goes unnoticed, either because it's too slow or too far away to notice. Therefore, I thought a forest-loss detector would be a fitting first project. Note that forest-loss does not necessarily mean deforestation (=permanent loss of forest and wildlife), and can be caused by natural disturbances, cultivation, or environmental stressors. 
-
-### Description
+## Description
 - **Input:** paired Sentinel-2 imagery from 2018 and 2025
 - **Bands:** B2, B3, B4, B8, B11, B12
 - **Model:** Siamese U-Net with shared encoder
@@ -14,10 +10,10 @@ Deforestation is becoming an increasingly dire problem, but oftentimes it goes u
 - **Training regions:** 30
 - **Training patches:** 10,303
 - **Validation regions:** 2
-- **Held-out test regions:** 3
+- **Test regions:** 3
 - **Patch size:** 128 × 128 pixels
 
-### Background
+## Background
 
 I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high precision during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection tool, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
 
@@ -110,13 +106,7 @@ Selected training-region example patches include:
 
 > These are selected patch-level examples intended to visualize model behaviour, not full-region benchmark results.
 
-## Key Findings and Limitations
-
-* **Geographic domain shift:** the initial model reached strong validation performance but failed badly on unseen Greece.
-* **Geographic diversity mattered:** expanding from 6 to 30 regions substantially improved generalization.
-* **Class imbalance existed at several levels:** between positive and negative pixels, between low- and high-loss patches, and between geographic regions.
-* **Threshold calibration mattered:** a threshold of 0.15 performed better than the default 0.50.
-* **Different regions fail differently:** Australia is dominated by false-positive sensitivity, Chile tends to overpredict loss, and Greece still underpredicts total loss.
+## Limitations
 
 The final model is substantially more robust than the first version, but a single global threshold still does not perform equally well across all landscapes.
 
@@ -150,7 +140,7 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 
 ## Technologies
 
-# Machine Learning
+**Machine Learning**
 
 * Python
 * PyTorch
@@ -195,26 +185,6 @@ Land-use classification baseline using transfer learning with ResNet18.
 ### [2. Siamese U-Net](notebooks/2_Siamese_UNet.ipynb)
 
 Multispectral change-detection pipeline, geographic dataset expansion, model iterations, validation, and final geographic testing.
-
-## Future Improvements
-
-* increase geographic and seasonal diversity
-* test pretrained remote-sensing encoders
-* improve probability calibration across regions
-* use larger spatial context around each prediction
-* evaluate additional fully unseen regions
-* distinguish temporary tree-cover loss from permanent deforestation
-* build a lightweight inference interface for new image pairs
-
-
-
-
-
-
-
-
-
-![EuroSAT classification accuracy](results/01_eurosat_classification_accuracy.png)
 
 
 
