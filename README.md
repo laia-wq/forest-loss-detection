@@ -3,12 +3,16 @@ A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery 
 
 from satellite imagery. Progressing from a simpler EuroSAT land-use classification, to a multispectral Siamese U-Net trained on paired Sentinel-2 imagery from 2018 and 2025.
 
-#hello#
-##hello##
-###hello###
+
 
 
 ## Project Overview (intro)
+
+Deforestation is becoming an increasingly dire problem, but oftentimes it goes unnoticed, either because it's too slow or too far away to notice. Therefore, I thought a forest-loss detector would be a fitting first project. Note that forest-loss does not necessarily mean deforestation (=permanent loss of forest and wildlife), and can be caused by natural disturbances, cultivation, or environmental stressors.
+
+Features
+
+
 
 This project began with a ResNet18 model, but the last layer was forgoten to train it on EuroSAT for land-use classification.
 
@@ -29,12 +33,10 @@ The project was then redesigned as a dedicated change-detection problem using a 
 - **Held-out test regions:** 3
 - **Patch size:** 128 × 128 pixels
 
-
-
-## Project Evolution
-
-### 1. EuroSAT Classification Baseline
-
+### hello
+## hello
+# hello
+ 
 The first stage used EuroSAT to train a pretrained ResNet18 model on 10 land-use classes.
 
 - 27,000 RGB satellite image tiles
@@ -252,6 +254,10 @@ Hansen Global Forest Change measures tree-cover loss, which is not necessarily i
 
 The final dataset is also relatively small compared with production-scale remote-sensing datasets.
 
+
+
+
+also it doesnt actually find real deforestation, forest loss can happen because of a lot of reasons
 ---
 
 ## Installation
