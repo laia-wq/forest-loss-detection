@@ -1,11 +1,11 @@
-### Forest Loss Detection from Satellite Imagery
+# Forest Loss Detection from Satellite Imagery
 A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery from 2018 and 2025
 
 ## Overview
 
 Deforestation is becoming an increasingly dire problem, but oftentimes it goes unnoticed, either because it's too slow or too far away to notice. Therefore, I thought a forest-loss detector would be a fitting first project. Note that forest-loss does not necessarily mean deforestation (=permanent loss of forest and wildlife), and can be caused by natural disturbances, cultivation, or environmental stressors. 
 
-# Description
+### Description
 - **Input:** paired Sentinel-2 imagery from 2018 and 2025
 - **Bands:** B2, B3, B4, B8, B11, B12
 - **Model:** Siamese U-Net with shared encoder
@@ -17,7 +17,7 @@ Deforestation is becoming an increasingly dire problem, but oftentimes it goes u
 - **Held-out test regions:** 3
 - **Patch size:** 128 × 128 pixels
 
-# Background
+### Background
 
 I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high precision during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection tool, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
 
@@ -73,23 +73,23 @@ Each example contains:
 
 The colours distinguish true positives, false positives, false negatives, and true negatives.
 
-# Sweden — Central — Validation
+### Sweden — Central — Validation
 
 ![Sweden Central example](results/examples/example_05_sweden_central.png)
 
-# Finland — Central — Training
+### Finland — Central — Training
 
 ![Finland Central example](results/examples/example_07_finland_central.png)
 
-# Germany — Black Forest — Training
+### Germany — Black Forest — Training
 
 ![Germany Black Forest example](results/examples/example_08_germany_blackforest.png)
 
-# Brazil — Rondonia — Training
+### Brazil — Rondonia — Training
 
 ![Brazil Rondonia example](results/examples/example_11_brazil_rondonia.png)
 
-# Canada — Alberta — Training
+### Canada — Alberta — Training
 
 ![Canada Alberta example](results/examples/example_16_canada_alberta.png)
 
@@ -150,7 +150,7 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 
 ## Technologies
 
-**Machine Learning**
+# Machine Learning
 
 * Python
 * PyTorch
@@ -188,11 +188,11 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 
 ## Notebooks
 
-# [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
+### [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
 
 Land-use classification baseline using transfer learning with ResNet18.
 
-# [2. Siamese U-Net](notebooks/2_Siamese_UNet.ipynb)
+### [2. Siamese U-Net](notebooks/2_Siamese_UNet.ipynb)
 
 Multispectral change-detection pipeline, geographic dataset expansion, model iterations, validation, and final geographic testing.
 
