@@ -1,0 +1,4 @@
+Region,Precision,Recall,F1,IoU,Actual Loss %,Predicted Loss %
+Australia NSW,0.078,0.2113,0.114,0.0604,0.09,0.24
+Chile Biobio,0.4081,0.787,0.5375,0.3675,12.53,24.16
+Greece,0.9186,0.2544,0.3985,0.2488,45.68,12.65

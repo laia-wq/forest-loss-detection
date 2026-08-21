@@ -1,0 +1,5 @@
+Metric,Score
+Final training accuracy,0.9443
+Validation accuracy,0.9573
+Test accuracy,0.9472
+Forest class accuracy,0.9231

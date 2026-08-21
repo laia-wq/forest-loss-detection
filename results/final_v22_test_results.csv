@@ -1,0 +1,4 @@
+Region,Forest Loss %,Precision,Recall,F1,IoU,Predicted Loss %
+Australia NSW,0.09,0.078,0.2113,0.114,0.0604,0.24
+Chile Biobio,12.53,0.4081,0.787,0.5375,0.3675,24.16
+Greece,45.68,0.9186,0.2544,0.3985,0.2488,12.65

@@ -1,0 +1,7 @@
+Metric,Project 1,Project 2
+Input bands,3,6
+Input dates,1,2
+Training regions,1,30
+Training examples,18900,10303
+Validation regions,0,2
+Held-out test regions,0,3

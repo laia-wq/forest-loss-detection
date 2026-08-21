@@ -1,0 +1,21 @@
+Example Number,Region,Split,README Showcase,Patch Index,Patch Loss %,Patch Precision,Patch Recall,Patch F1,Saved File
+1,Greece,Test (unseen),Yes,224,44.92798,0.9312762973352033,0.09020513517185165,0.16447857319791925,/home/julienleh/Deforestation_Project/results/examples/example_01_greece.png
+2,Chile — Biobio,Test (unseen),Yes,178,30.291748,0.5206519312346506,0.9397541809389482,0.6700668055455787,/home/julienleh/Deforestation_Project/results/examples/example_02_chile_biobio.png
+3,Australia — New South Wales,Test (unseen),Yes,205,1.5930176,0.803921568627451,0.15708812260536398,0.26282051282051283,/home/julienleh/Deforestation_Project/results/examples/example_03_australia_nsw.png
+4,Spain — Galicia,Validation,Yes,47,25.213623,0.6476039184537993,0.5921084483175987,0.618614061709661,/home/julienleh/Deforestation_Project/results/examples/example_04_spain_galicia.png
+5,Sweden — Central,Validation,No,120,9.942627,0.4336803983703033,0.5880908532842235,0.49921834288692035,/home/julienleh/Deforestation_Project/results/examples/example_05_sweden_central.png
+6,Norway — Innlandet,Train,No,491,2.8015137,0.5842245989304813,0.9520697167755992,0.724109362054681,/home/julienleh/Deforestation_Project/results/examples/example_06_norway_innlandet.png
+7,Finland — Central,Train,No,414,25.006104,0.7471286743235351,0.9367830119599707,0.831275720164609,/home/julienleh/Deforestation_Project/results/examples/example_07_finland_central.png
+8,Germany — Black Forest,Train,No,144,20.214844,0.6944114149821641,0.8816425120772947,0.7769056804576294,/home/julienleh/Deforestation_Project/results/examples/example_08_germany_blackforest.png
+9,France — Massif Central,Train,No,249,5.621338,0.0,0.0,0.0,/home/julienleh/Deforestation_Project/results/examples/example_09_france_massifcentral.png
+10,Portugal — Central,Train,No,199,34.79004,0.7457356076759062,0.9817543859649123,0.8476219327476522,/home/julienleh/Deforestation_Project/results/examples/example_10_portugal_central.png
+11,Brazil — Rondonia,Train,No,77,24.98169,0.8803869832893579,0.9782555582702175,0.926744589746557,/home/julienleh/Deforestation_Project/results/examples/example_11_brazil_rondonia.png
+12,Brazil — Mato Grosso,Train,No,181,15.74707,0.6742671009771987,0.08023255813953488,0.1434014547973675,/home/julienleh/Deforestation_Project/results/examples/example_12_brazil_matogrosso.png
+13,Argentina — Misiones,Train,No,108,29.943848,0.9053100631266245,0.49694251936404404,0.6416633767601,/home/julienleh/Deforestation_Project/results/examples/example_13_argentina_misiones.png
+14,Bolivia — Santa Cruz,Train,No,24,25.622559,0.7756410256410257,0.5476417341591234,0.6419994414967886,/home/julienleh/Deforestation_Project/results/examples/example_14_bolivia_santacruz.png
+15,Canada — British Columbia,Train,No,232,14.367676,0.5613905325443787,0.9672897196261683,0.7104524180967238,/home/julienleh/Deforestation_Project/results/examples/example_15_canada_bc.png
+16,Canada — Alberta,Train,No,23,35.79712,0.7361630757321636,0.9728900255754476,0.8381316098707403,/home/julienleh/Deforestation_Project/results/examples/example_16_canada_alberta.png
+17,Indonesia — Kalimantan,Train,No,46,35.11963,0.7950849295265631,0.38234271810914144,0.5163713179204319,/home/julienleh/Deforestation_Project/results/examples/example_17_indonesia_kalimantan.png
+18,Indonesia — Sumatra,Train,No,81,45.355225,0.7363847045191193,0.8552011842282331,0.7913579478239212,/home/julienleh/Deforestation_Project/results/examples/example_18_indonesia_sumatra.png
+19,Japan — Hokkaido,Train,No,12,11.499023,0.7580504786771105,0.46231422505307856,0.5743488295417079,/home/julienleh/Deforestation_Project/results/examples/example_19_japan_hokkaido.png
+20,South Africa — Mpumalanga,Train,No,132,30.285645,0.3599849284099472,0.9627166465135026,0.524023694602896,/home/julienleh/Deforestation_Project/results/examples/example_20_southafrica_mpumalanga.png

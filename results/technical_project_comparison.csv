@@ -1,0 +1,16 @@
+Category,Project 1 — EuroSAT baseline,Project 2 — Final Siamese U-Net
+Primary task,10-class land-use classification + heuristic change detection,Binary forest-loss segmentation between 2018 and 2025
+Model,Pretrained ResNet18,Siamese U-Net with shared encoder
+Input imagery,Single-date RGB imagery,Paired Sentinel-2 imagery
+Input bands,3 bands (RGB),6 bands × 2 dates
+Spatial unit,64×64 image tile,128×128 pixel patch
+Training data,"27,000 EuroSAT images","10,303 training patches"
+Training geography,EuroSAT European land-use dataset,30 geographically diverse training regions
+Target / supervision,10 land-cover classes,Hansen forest-loss pixel mask
+Loss,CrossEntropyLoss,BCE + Tversky
+Augmentation,Standard pretrained ResNet transforms,Synchronized flips + 90° rotations
+Normalization,ImageNet preprocessing,Per-band training-set mean/std
+Sampling strategy,Random batches,Region + change-balanced sampling
+Validation strategy,Random EuroSAT validation split,2 held-out validation regions
+Final output,Land-use class per tile,Pixel-level forest-loss probability map
+Main limitation,Not trained directly for forest-loss detection,Performance still varies strongly by geography
