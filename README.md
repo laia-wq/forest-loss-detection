@@ -121,9 +121,6 @@ Users can select a geographic region and satellite patch to compare:
 
 ![Interactive Gradio demo](results/gradio_demo.png)
 
-
-to something like:
-
 ```markdown
 Run locally after installing dependencies and providing the trained model checkpoint and prepared dataset files:
 ```
