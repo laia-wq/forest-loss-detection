@@ -221,14 +221,14 @@ The remaining examples are available in:
 
 Selected training-region example patches include:
 
-| Region                 |  Patch F1 |
-| ---------------------- | --------: |
-| Brazil — Rondonia      | **0.927** |
-| Portugal — Central     | **0.848** |
-| Canada — Alberta       | **0.838** |
-| Finland — Central      | **0.831** |
-| Indonesia — Sumatra    | **0.791** |
-| Germany — Black Forest | **0.777** |
+| Region | Patch F1 |
+|---|---:|
+| Portugal — Central | **0.848** |
+| Indonesia — Sumatra | **0.791** |
+| Argentina — Misiones | **0.642** |
+| Bolivia — Santa Cruz | **0.642** |
+| Japan — Hokkaido | **0.574** |
+| South Africa — Mpumalanga | **0.524** |
 
 > These are selected patch-level examples intended to visualize model behaviour, not full-region benchmark results.
 
