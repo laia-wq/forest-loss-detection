@@ -1,27 +1,11 @@
-# Forest Loss Detection from Satellite Imagery (shorter)
+### Forest Loss Detection from Satellite Imagery
 A multispectral Siamese U-Net that detects forest loss using Sentinel-2 imagery from 2018 and 2025
 
-from satellite imagery. Progressing from a simpler EuroSAT land-use classification, to a multispectral Siamese U-Net trained on paired Sentinel-2 imagery from 2018 and 2025.
+## Overview
 
+Deforestation is becoming an increasingly dire problem, but oftentimes it goes unnoticed, either because it's too slow or too far away to notice. Therefore, I thought a forest-loss detector would be a fitting first project. Note that forest-loss does not necessarily mean deforestation (=permanent loss of forest and wildlife), and can be caused by natural disturbances, cultivation, or environmental stressors. 
 
-
-
-## Project Overview (intro)
-
-Deforestation is becoming an increasingly dire problem, but oftentimes it goes unnoticed, either because it's too slow or too far away to notice. Therefore, I thought a forest-loss detector would be a fitting first project. Note that forest-loss does not necessarily mean deforestation (=permanent loss of forest and wildlife), and can be caused by natural disturbances, cultivation, or environmental stressors.
-
-Features
-
-
-
-This project began with a ResNet18 model, but the last layer was forgoten to train it on EuroSAT for land-use classification.
-
-That first model achieved strong classification accuracy, but using land-cover classifications heuristically to detect forest loss didn't generalize well across different geographic regions.
-
-The project was then redesigned as a dedicated change-detection problem using a Siamese U-Net.
-
-### Final system (do i need)
-
+# Description
 - **Input:** paired Sentinel-2 imagery from 2018 and 2025
 - **Bands:** B2, B3, B4, B8, B11, B12
 - **Model:** Siamese U-Net with shared encoder
@@ -33,81 +17,26 @@ The project was then redesigned as a dedicated change-detection problem using a 
 - **Held-out test regions:** 3
 - **Patch size:** 128 × 128 pixels
 
-### hello
-## hello
-# hello
- 
-The first stage used EuroSAT to train a pretrained ResNet18 model on 10 land-use classes.
+# Background
 
-- 27,000 RGB satellite image tiles
-- 10 classes
-- 70 / 15 / 15 train-validation-test split
-- Test accuracy: 94.72%
-- Forest-class accuracy: 92.31%
-
-![EuroSAT classification accuracy](results/01_eurosat_classification_accuracy.png)
-
-The classifier was then applied to imagery from different years as an initial forest-loss detector.
-
-This worked as a proof of concept, but when it was validated with the Hansen Global Forest Change mask, it showed poor performance with unseen regions, especially outside Europe.
-
-This is mainly because the EuroSTAT data contained only European images, making it better suited for continent specific classification. Furthermore, ResNet18 wasn't trained directly for change detection, it was trained for class>
-
----
-
-### 2. Siamese U-Net Change Detection
-
-The second stage replaced heuristic classification with direct pixel-level segmentation.
-
-The model receives two multispectral Sentinel-2 images from different years and learns where forest loss occurred between them.
+I started by training a ResNet18 model with EuroSAT's 27,000 64x64 RGB satellite image tiles, which was traditionally used as a land-use classification tool. While it showed high precision during training (94.72% test accuracy), it performed poorly when its results were compared to Hansen Global Forest Change. So I decided to use a dedicated change-detection tool, a Siamese U-Net, to fix many setbacks and improve F1 scores. The Siamese U-Net processes 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
 
 Key improvements included:
 
 - paired 2018 and 2025 imagery
-- six spectral bands instead of RGB only
+- six spectral bands instead of RGB only (RGB, NIR, SWIR1, SWIR2)
 - shared Siamese encoder
 - U-Net decoder
 - synchronized data augmentation
 - training-only per-band normalization
-- region-balanced sampling
+- region-balanced sampling (between low, medium, high-loss patches)
 - change-balanced sampling
-- BCE + Tversky loss
+- BCE + Tversky loss (α = 0.4, β = 0.6)
 - learning-rate scheduling
 - early stopping
-- validation-based threshold tuning
-
----
-
-## Model and Training Approach
-
-The Siamese U-Net processes the 2018 and 2025 images through the same encoder. Features extracted from the two dates are compared using absolute differences, and a U-Net decoder converts those differences into a pixel-level forest-loss probability map.
-
-
-The final model uses six Sentinel-2 spectral bands:
-
-| Band | Information           |
-| ---- | --------------------- |
-| B2   | Blue                  |
-| B3   | Green                 |
-| B4   | Red                   |
-| B8   | Near Infrared         |
-| B11  | Short-Wave Infrared 1 |
-| B12  | Short-Wave Infrared 2 |
-
-Training included per-band normalization, synchronized rotations and flips, region-balanced sampling, and balancing between low-, medium-, and high-loss patches.
-
-The final model used Binary Cross Entropy + Tversky Loss with:
-α = 0.4
-β = 0.6
-
-A validation-only threshold sweep selected a final probability threshold of 0.15.
-
----
-
-## Dataset Expansion and Model Iterations
+- validation-based threshold tuning (final probability threshold=0.15)
 
 The first Siamese U-Net was trained on only 6 regions and 1,734 patches.
-
 Although it reached approximately 0.70 validation F1, it generalized very poorly to some unseen landscapes.
 
 The dataset was therefore expanded substantially:
@@ -121,38 +50,7 @@ The dataset was therefore expanded substantially:
 
 This added **8,569 training patches**, increasing the training dataset by approximately **5.9×** and the number of geographic training regions by **5×**.
 
-Validation was performed separately on Sweden (Central) and Spain (Galicia)
-
-At the final threshold of 0.15:
-
-| Validation Region |        F1 |
-| ----------------- | --------: |
-| Sweden            | **0.639** |
-| Spain Galicia     | **0.517** |
-| Mean              | **0.578** |
-
----
-
-## Results
-
-### Key results
-
-| Milestone              |             Result |
-| ---------------------- | -----------------: |
-| EuroSAT test accuracy  |         **94.72%** |
-| Forest-class accuracy  |         **92.31%** |
-| Training regions       |         **6 → 30** |
-| Training patches       | **1,734 → 10,303** |
-| Added training patches |         **+8,569** |
-| Training-data increase |           **5.9×** |
-| Greece test F1         |  **0.025 → 0.399** |
-| Greece test recall     |  **0.012 → 0.254** |
-| Chile test F1          |          **0.538** |
-| Chile test recall      |          **0.787** |
-
-### Generalization improvement on Greece
-
-The initial Siamese model had high precision on Greece but detected almost none of the real forest loss.
+These feaures led to improvements such as the following data on Greece:
 
 | Metric    | Initial Siamese | Final V2.2 |
 | --------- | --------------: | ---------: |
@@ -165,30 +63,6 @@ This represents approximately a 16× improvement in F1  and a 20× improvement i
 
 ![Siamese model improvement](results/03_siamese_v1_vs_final_greece.png)
 
----
-
-### Held-Out Geographic Tests
-
-The final model was evaluated on three regions that were not used for training or validation.
-
-| Region        | Actual Loss | Precision |    Recall |        F1 |   IoU | Predicted Loss |
-| ------------- | ----------: | --------: | --------: | --------: | ----: | -------------: |
-| Australia NSW |       0.09% |     0.078 |     0.211 |     0.114 | 0.060 |          0.24% |
-| Chile Biobio  |      12.53% |     0.408 |   0.787   |   0.538   | 0.368 |         24.16% |
-| Greece        |      45.68% |   0.919   |     0.254 |   0.399   | 0.249 |         12.65% |
-
-![Final held-out test results](results/04_final_test_precision_recall_f1.png)
-
-The three test regions represent very different forest-loss conditions:
-
-* Australia NSW: extremely low forest-loss prevalence
-* Chile Biobio: medium/high forest-loss prevalence
-* Greece: very high forest-loss prevalence
-
-Performance varies across these environments, showing that geographic calibration remains one of the main challenges.
-
----
-
 ## Example Predictions
 
 Predictions were generated across 20 geographic regions.
@@ -199,23 +73,23 @@ Each example contains:
 
 The colours distinguish true positives, false positives, false negatives, and true negatives.
 
-### Sweden — Central — Validation
+# Sweden — Central — Validation
 
 ![Sweden Central example](results/examples/example_05_sweden_central.png)
 
-### Finland — Central — Training
+# Finland — Central — Training
 
 ![Finland Central example](results/examples/example_07_finland_central.png)
 
-### Germany — Black Forest — Training
+# Germany — Black Forest — Training
 
 ![Germany Black Forest example](results/examples/example_08_germany_blackforest.png)
 
-### Brazil — Rondonia — Training
+# Brazil — Rondonia — Training
 
 ![Brazil Rondonia example](results/examples/example_11_brazil_rondonia.png)
 
-### Canada — Alberta — Training
+# Canada — Alberta — Training
 
 ![Canada Alberta example](results/examples/example_16_canada_alberta.png)
 
@@ -236,11 +110,7 @@ Selected training-region example patches include:
 
 > These are selected patch-level examples intended to visualize model behaviour, not full-region benchmark results.
 
----
-
 ## Key Findings and Limitations
-
-The project highlighted several practical machine-learning challenges.
 
 * **Geographic domain shift:** the initial model reached strong validation performance but failed badly on unseen Greece.
 * **Geographic diversity mattered:** expanding from 6 to 30 regions substantially improved generalization.
@@ -254,54 +124,29 @@ Hansen Global Forest Change measures tree-cover loss, which is not necessarily i
 
 The final dataset is also relatively small compared with production-scale remote-sensing datasets.
 
-
-
-
-also it doesnt actually find real deforestation, forest loss can happen because of a lot of reasons
----
-
 ## Installation
 
 Clone the repository:
-
 ```bash
 git clone https://github.com/laia-wq/forest-loss-detection.git
 cd forest-loss-detection
 ```
-
 Install the required packages:
-
 ```bash
 pip install -r requirements.txt
 ```
-
 Launch Jupyter:
-
 ```bash
 jupyter lab
 ```
 
 The raw Sentinel-2 imagery and generated NumPy datasets are not included in the repository because of their size.
 
----
-
-## Data and Reproducibility
-
-The project uses:
-
-* EuroSAT
-* Sentinel-2
-* Hansen Global Forest Change
-
-The raw datasets are not committed to GitHub.
-
 Detailed information about preprocessing, geographic splits, data quality, and excluded regions is available in:
 
 [`data/README.md`](data/README.md)
 
 The notebooks contain the model-development and evaluation workflow, but reproducing the complete training process requires regenerating or providing the source satellite imagery.
-
----
 
 ## Technologies
 
@@ -341,19 +186,15 @@ The notebooks contain the model-development and evaluation workflow, but reprodu
 * NVIDIA DGX Spark
 * NVIDIA GB10 GPU
 
----
-
 ## Notebooks
 
-### [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
+# [1. EuroSAT Classification](notebooks/1_EuroSAT_Classification.ipynb)
 
 Land-use classification baseline using transfer learning with ResNet18.
 
-### [2. Siamese U-Net](notebooks/2_Siamese_UNet.ipynb)
+# [2. Siamese U-Net](notebooks/2_Siamese_UNet.ipynb)
 
 Multispectral change-detection pipeline, geographic dataset expansion, model iterations, validation, and final geographic testing.
-
----
 
 ## Future Improvements
 
@@ -364,3 +205,19 @@ Multispectral change-detection pipeline, geographic dataset expansion, model ite
 * evaluate additional fully unseen regions
 * distinguish temporary tree-cover loss from permanent deforestation
 * build a lightweight inference interface for new image pairs
+
+
+
+
+
+
+
+
+
+![EuroSAT classification accuracy](results/01_eurosat_classification_accuracy.png)
+
+
+
+
+
+
